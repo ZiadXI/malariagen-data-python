@@ -356,13 +356,19 @@ def _get_within_cds_effect(ann, base_effect, cds, cdss):
             effect = base_effect._replace(effect="STOP_GAINED", impact="HIGH")
 
         else:
-            # TODO NON_SYNONYMOUS_START and NON_SYNONYMOUS_STOP
+            if ref_cds_start == 0:
+                # variant at start codon position produces a different amino acid
+                # e.g.: Ctg/Atg, L/M (non-canonical start codon mutated)
+                effect = base_effect._replace(
+                    effect="NON_SYNONYMOUS_START", impact="LOW"
+                )
 
-            # variant causes a codon that produces a different amino acid
-            # e.g.: Tgg/Cgg, W/R
-            effect = base_effect._replace(
-                effect="NON_SYNONYMOUS_CODING", impact="MODERATE"
-            )
+            else:
+                # variant causes a codon that produces a different amino acid
+                # e.g.: Tgg/Cgg, W/R
+                effect = base_effect._replace(
+                    effect="NON_SYNONYMOUS_CODING", impact="MODERATE"
+                )
 
     else:
         # INDELs and MNPs

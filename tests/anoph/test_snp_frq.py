@@ -144,6 +144,7 @@ expected_effects = [
     "SYNONYMOUS_STOP",
     "SYNONYMOUS_START",
     "NON_SYNONYMOUS_CODING",
+    "NON_SYNONYMOUS_START",
     "START_LOST",
     "STOP_LOST",
     "STOP_GAINED",
